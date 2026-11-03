@@ -1,0 +1,134 @@
+{{define "styles"}}
+    <link rel="stylesheet" href="/css/contact.css">
+{{end}}
+{{define "main"}}
+    <header class="layout-container" id="contact-header">
+        <div class="layout-content">
+            <div class="header-body">
+                <h1>Science is our engine.</h1>
+                <p class="header-text">We went to high school together, but it certainly does not end there.</p>
+                <a href="mailto:organizatori@zvazvedu.cz" class="secondary-button">Write to us</a>
+            </div>
+            <picture>
+                <source srcset="/media/imgs/base/kocka_dira-white.webp" media="(prefers-color-scheme: dark)">
+                <img class="mark-img" src="/media/imgs/base/kocka_dira-black.webp" alt="">
+            </picture>
+        </div>
+    </header>
+    <section class="layout-container" id="contact">
+        <div class="layout-content">
+
+            {{/* Pořadí oddělení je stejné jako v layouts/_default/contact.html. Anglické názvy oddělení a pozic jsou v data/team.yaml (team_en, position_en). */}}
+            {{ $departments := slice "Vedení" "Administrativní oddělení" "PR oddělení" "HR oddělení" "Technické oddělení" "Obchodní oddělení" "Regionální koordinátoři" "Zakladatelé" }}
+            {{ range $teamName := $departments }}
+                {{ $departmentEn := "" }}
+                {{ range $m := hugo.Data.team }}
+                    {{ $mTeamsEn := default slice $m.team_en }}
+                    {{ range $idx, $t := default slice $m.team }}
+                        {{ if and (eq $t $teamName) (not $departmentEn) (lt $idx (len $mTeamsEn)) }}
+                            {{ $departmentEn = index $mTeamsEn $idx }}
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+                {{ if not $departmentEn }}
+                    {{ warnf "data/team.yaml: no English department name (team_en) for %q" $teamName }}
+                    {{ $departmentEn = $teamName }}
+                {{ end }}
+
+                <h3 id="{{ $teamName | urlize }}">{{ $departmentEn }}</h3>
+
+                {{ range $member := hugo.Data.team }}
+                    {{ $memberTeams := default slice $member.team }}
+                    {{ if in $memberTeams $teamName }}
+                        {{ $posIndex := -1 }}
+                        {{ range $idx, $t := $memberTeams }}
+                            {{ if eq $t $teamName }}
+                                {{ $posIndex = $idx }}
+                            {{ end }}
+                        {{ end }}
+                        {{ $currentPosition := "" }}
+                        {{ if ge $posIndex 0 }}
+                            {{ $currentPosition = index (default slice $member.position) $posIndex }}
+                        {{ end }}
+                        {{/* Anglická pozice je v data/team.yaml v position_en, ve stejném pořadí jako position */}}
+                        {{ $position := $currentPosition }}
+                        {{ $positionsEn := default slice $member.position_en }}
+                        {{ if and (ge $posIndex 0) (lt $posIndex (len $positionsEn)) }}
+                            {{ $position = index $positionsEn $posIndex }}
+                        {{ else if $currentPosition }}
+                            {{ warnf "data/team.yaml: %s has no English position (position_en) for %q" $member.name $currentPosition }}
+                        {{ end }}
+
+                <div class="team-member team-{{ $teamName | urlize }}" id="{{ $member.alias }}">
+                    <div class="team-member-photo">
+                        {{ if $member.photo }}
+                        <img src="/media/imgs/team/{{ replace $member.photo ".webp" "-sm.webp" }}" srcset="/media/imgs/team/{{ replace $member.photo ".webp" "-sm.webp" }} 600w, /media/imgs/team/{{ replace $member.photo ".webp" "-md.webp" }} 1200w, /media/imgs/team/{{ replace $member.photo ".webp" "-hd.webp" }} 1920w" sizes="150px" alt="{{ $member.name }}">
+                        {{ else }}
+                        <div style="width: 150px; height: 150px; background: #eee; border-radius: 50%;"></div>
+                        {{ end }}
+                    </div>
+
+                    <div class="team-member-info">
+                        <strong>{{ $member.name }}</strong>
+                        <p style="margin-bottom:.5rem">{{ $position }}</p>
+
+                        {{ if $member.mail }}
+                        <p style="margin-bottom:.5rem">
+                            <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                            <a href="mailto:{{ $member.mail }}">{{ $member.mail }}</a>
+                        </p>
+                        {{ end }}
+
+                        {{ if $member.web }}
+                        <p>
+                            <i class="fa-solid fa-globe" aria-hidden="true"></i>
+                            <a href="https://{{ $member.web }}/">{{ $member.web }}</a>
+                        </p>
+                        {{ end }}
+
+                        <div class="team-member-socials">
+                            {{ if $member.ig }}
+                            <a href="{{ $member.ig }}">
+                                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                            </a>
+                            {{ end }}
+
+                            {{ if $member.linkedin }}
+                            <a href="{{ $member.linkedin }}">
+                                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                            {{ end }}
+
+                            {{ if $member.discord }}
+                            <a href="{{ $member.discord }}">
+                                <i class="fa-brands fa-discord" aria-hidden="true"></i>
+                            </a>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+                    {{ end }}
+                {{ end }}
+
+            {{ end }}
+        </div>
+    </section>
+
+    <section class="layout-container" id="join-us">
+        <div class="layout-content">
+            <h4>Want to bring Consider Science! to your city?</h4>
+            <a href="mailto:organizatori@zvazvedu.cz" class="secondary-button">Write to us &rarr;</a>
+        </div>
+    </section>
+
+    <section class="layout-container" id="actions">
+        <div class="layout-content">
+            <a href="https://discord.gg/XggNwnz5n8" target="_blank" id="actions-discord">
+                <span>Follow our Discord! <br><br> <i class="fa-brands fa-discord"></i></span>
+            </a>
+            <a href="https://instagram.com/zvaz.vedu?igshid=MzRlODBiNWFlZA==" target="_blank" id="actions-ig">
+                <span>Follow the latest news on our Instagram! <br><br> <i class="fa-brands fa-instagram"></i></span>
+            </a>
+        </div>
+    </section>
+{{end}}

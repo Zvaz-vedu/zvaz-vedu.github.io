@@ -7,7 +7,7 @@ headerText: "22. května v Aule Jihočeské univezity"
 headerPhoto: "/media/imgs/gallery/ceske-budejovice26/ZV_Budejovice_091834.webp"
 location: Aula Jihočeské univerzity
 
-events: "2"
+events: "1"
 participants: "220"
 
 liveAction: true

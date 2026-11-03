@@ -11,6 +11,14 @@ URLS = [
     "http://localhost:1313/partneri/",
     "http://localhost:1313/o-nas/",
     "http://localhost:1313/kontakt/",
+    "http://localhost:1313/en/",
+    "http://localhost:1313/en/about/",
+    "http://localhost:1313/en/contact/",
+    "http://localhost:1313/en/pilsen/",
+    "http://localhost:1313/en/brno/",
+    "http://localhost:1313/en/prague/",
+    "http://localhost:1313/en/liberec/",
+    "http://localhost:1313/en/ceske-budejovice/",
 ]
 
 # Testujeme šířky po 50px krocích pro velmi jemnou síť od 320 do 1200

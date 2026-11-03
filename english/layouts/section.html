@@ -1,0 +1,81 @@
+{{define "styles"}}
+    <link rel="stylesheet" href="/css/home.css">
+{{end}}
+{{define "main"}}
+    <div class="layout-container" id="hero">
+        <div class="layout-content">
+            <div id="hero-body">
+                <h1 id="hero-call">CONSIDER <span>SCIENCE!</span></h1>
+                <p id="hero-text">Come and get inspired by the stories of your peers, who already have a piece of scientific career behind them at high school. Will you become one of them too?</p>
+                <div id="hero-row">
+                    <a href="/en/pilsen/" class="primary-button">Pilsen</a>
+                    <a href="/en/brno/" class="primary-button">Brno</a>
+                    <a href="/en/prague/" class="primary-button">Prague</a>
+                    <a href="/en/liberec/" class="primary-button">Liberec</a>
+                    <a href="/en/ceske-budejovice/" class="primary-button">České Budějovice</a>
+                </div>
+            </div>
+            <div id="hero-graphics">
+                <img id="hero-graphics-primary" src="/media/imgs/home/home1-sm.webp" srcset="/media/imgs/home/home1-sm.webp 600w, /media/imgs/home/home1-md.webp 1200w, /media/imgs/home/home1-hd.webp 1920w" sizes="300px" alt="Students at a Consider Science! event">
+                <img id="hero-graphics-secondary" src="/media/imgs/home/home2-sm.webp" srcset="/media/imgs/home/home2-sm.webp 600w, /media/imgs/home/home2-md.webp 1200w, /media/imgs/home/home2-hd.webp 1920w" sizes="300px" alt="A science demonstration at an event">
+                <picture>
+                    <source srcset="/media/imgs/base/zv_kocka_45deg_zv-white.webp" media="(prefers-color-scheme: dark)">
+                    <img id="hero-graphics-icon" src="/media/imgs/base/zv_kocka_45deg_zv-black.webp" alt="">
+                </picture>
+            </div>
+        </div>
+    </div>
+    <div class="layout-container" id="what">
+        <div class="layout-content">
+            <div class="what-section">
+                <h3>Consider Science! is...</h3>
+                <p>Consider Science! is a project that popularises natural and technical sciences together with active high-school students.</p>
+                <a href="/en/about/" class="secondary-button">More ></a>
+            </div>
+            <div class="what-section">
+                <i class="fa-solid fa-bullseye"></i>
+                <p>The goal of Consider Science! is to motivate young people to take an interest in science, to show them that it is not only dry theory, and that it can be fun and open up many opportunities for the future.</p>
+            </div>
+            <div class="what-section">
+                <i class="fa-solid fa-users"></i>
+                <p>Our events feature high-school students who already have something behind them, from competitions to their own scientific projects, and want to pass their experience on.</p>
+            </div>
+        </div>
+    </div>
+    <div class="quote-title">
+        <span>We bring science to</span><span class="quote-title-highlight" id="mlade-lidi">young people.</span>
+    </div>
+    <div class="layout-container" id="stats">
+        <div class="layout-content bento-board">
+            {{/* Čísla se berou z české hlavní stránky (content/_index.md) */}}
+            {{ $home := site.GetPage "/" }}
+            <div class="bento-board-item bento-row1col1">
+                <h3 class="bento-title">{{ $home.Params.events }} major events</h3>
+                <p class="bento-text">under the Consider Science! name</p>
+            </div>
+            <div class="bento-board-item bento-row1col2">
+                <h3 class="bento-title">{{ $home.Params.speakers }} speakers</h3>
+                <p class="bento-text">young scientists on our stages</p>
+            </div>
+            <div class="bento-board-item bento-row2col1">
+                <h3 class="bento-title">{{ $home.Params.participants }} participants</h3>
+                <p class="bento-text">so far...</p>
+            </div>
+            <div class="bento-board-item bento-row2col2">
+                <h3 class="bento-title">{{ $home.Params.schools }} schools</h3>
+                <p class="bento-text">our high-school students came from</p>
+            </div>
+        </div>
+    </div>
+    <div class="layout-container" id="cta">
+        <div class="layout-content">
+            <div class="quote-title">
+                <p id="cta-call">It is never too early to <span class="quote-title-highlight" id="zacit">start.</span></p>
+            </div>
+            <div id="cta-map">
+                {{ partial "en-map.html" . }}
+            </div>
+            <p id="cta-text">We organise events in Pilsen, Brno, Prague, Liberec and České Budějovice. Click a region on the map to find out more.</p>
+        </div>
+    </div>
+{{end}}

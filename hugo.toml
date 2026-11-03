@@ -8,3 +8,27 @@ enableEmoji = true
     description = 'Oficiální stránky Zvaž vědu!'
 [markup.goldmark.renderer]
     unsafe = true
+
+# Anglická verze je celá ve složce english/ a Hugo ji "připojí" na místa, kde ji očekává (viz dokumentace.md).
+[module]
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+  [[module.mounts]]
+    source = "english/content"
+    target = "content/en"
+  [[module.mounts]]
+    source = "layouts"
+    target = "layouts"
+  [[module.mounts]]
+    source = "english/layouts"
+    target = "layouts/en"
+  [[module.mounts]]
+    source = "english/partials"
+    target = "layouts/partials"
+  [[module.mounts]]
+    source = "data"
+    target = "data"
+  [[module.mounts]]
+    source = "static"
+    target = "static"

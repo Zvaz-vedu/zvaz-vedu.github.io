@@ -1,0 +1,170 @@
+{{/*
+    Anglická stránka města. Fotka, čísla, tým, partneři a fotogalerie se berou z české stránky města
+    (front matter `czechPage`, např. "/plzen"), takže se aktualizují spolu s ní.
+    V anglickém souboru jsou jen texty: `headerTitle`, `city`, `venue` a souhrn dosavadních akcí v těle stránky.
+    Fotogalerie je z nejnovějšího ročníku ve složce města (stejná jako na české stránce ročníku).
+*/}}
+{{define "styles"}}
+    <link rel="stylesheet" href="/css/location.css">
+    <link rel="stylesheet" href="/css/budejovice.css">
+    <link rel="stylesheet" href="/css/report.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"/>
+{{end}}
+
+{{define "scripts"}}
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+{{end}}
+
+{{define "main"}}
+    {{ $cz := site.GetPage .Params.czechPage }}
+    {{ $photo := $cz.Params.headerPhoto }}
+    {{ $photoSm := replaceRE "\\.(webp|jpg|jpeg|png)$" "-sm.webp" $photo }}
+    {{ $photoMd := replaceRE "\\.(webp|jpg|jpeg|png)$" "-md.webp" $photo }}
+    {{ $photoHd := replaceRE "\\.(webp|jpg|jpeg|png)$" "-hd.webp" $photo }}
+    <header class="layout-container">
+        <div class="layout-content">
+            <div class="header-body">
+                <h1>Consider Science!<br><span>{{ .Params.headerTitle }}</span></h1>
+                <p class="header-text">
+                    {{ with .Params.venue }}
+                        {{/* Anglické názvy míst jsou delší než české, proto smí text zalomit */}}
+                        <span class="header-meta-item" style="white-space: normal">
+                            <i class="fa-solid fa-location-dot"></i> {{ . }}&nbsp;
+                        </span>
+                    {{ end }}
+                </p>
+            </div>
+            <div class="header-graphics">
+                <img class="header-graphics-photo"
+                     src="{{ $photoSm | safeURL }}"
+                     srcset="{{ $photoSm | safeURL }} 600w, {{ $photoMd | safeURL }} 1200w, {{ $photoHd | safeURL }} 1920w"
+                     sizes="300px"
+                     fetchpriority="high"
+                     decoding="sync"
+                     alt="{{ .Params.headerTitle }}">
+                <picture>
+                    <source srcset="/media/imgs/base/zv_kocka_45deg_zv-white.webp" media="(prefers-color-scheme: dark)">
+                    <img class="header-graphics-logo" src="/media/imgs/base/zv_kocka_45deg_zv-black.webp" alt="">
+                </picture>
+            </div>
+        </div>
+    </header>
+
+    {{ $events := string $cz.Params.events }}
+    {{ if or $cz.Params.participants $cz.Params.speakers (and $events (ne $events "0")) }}
+        <section class="layout-container" id="accomplishments">
+            <div class="layout-content bento-board">
+                {{ if and $events (ne $events "0") }}
+                    <div class="bento-board-item">
+                        <h2 class="bento-title">{{ $events }}</h2>
+                        <p class="bento-text">events</p>
+                    </div>
+                {{ end }}
+                {{ with $cz.Params.participants }}
+                    <div class="bento-board-item">
+                        <h2 class="bento-title">{{ . }}</h2>
+                        <p class="bento-text">participants</p>
+                    </div>
+                {{ end }}
+                {{ with $cz.Params.speakers }}
+                    <div class="bento-board-item">
+                        <h2 class="bento-title">{{ . }}</h2>
+                        <p class="bento-text">speakers</p>
+                    </div>
+                {{ end }}
+            </div>
+        </section>
+    {{ end }}
+
+    {{/* Nejnovější ročník = nejnovější stránka v české složce města, její fotky jsou ve složce gallery/<název souboru> */}}
+    {{ $editions := where site.RegularPages ".File.Dir" $cz.File.Dir }}
+    {{ with index $editions.ByDate.Reverse 0 }}
+        {{ $name := .File.BaseFileName }}
+        {{ $year := .Date.Year }}
+        {{ $dir := printf "static/media/imgs/gallery/%s" $name }}
+        <section class="layout-container" id="content">
+            <div class="layout-content" style="align-items: center">
+                <div class="gallery-container">
+                    <h3>{{ $.Params.city }} {{ $year }}</h3>
+                    <div class="img-body">
+                        {{ if fileExists $dir }}
+                            {{/* Nejdřív úvodní fotka ročníku (main.webp), potom ostatní podle názvu */}}
+                            {{ if fileExists (printf "%s/main.webp" $dir) }}
+                                <a href="/media/imgs/gallery/{{ $name }}/main.webp" class="glightbox" data-gallery="gallery1">
+                                    <img src="/media/imgs/gallery/{{ $name }}/main-sm.webp" srcset="/media/imgs/gallery/{{ $name }}/main-sm.webp 600w, /media/imgs/gallery/{{ $name }}/main-md.webp 1200w, /media/imgs/gallery/{{ $name }}/main-hd.webp 1920w" sizes="(max-width: 800px) 50vw, 30vw" alt="{{ $.Params.city }} {{ $year }}">
+                                </a>
+                            {{ end }}
+                            {{/* Ročníky mají i stovky fotek, tady se ukáže nejvýš 12 rovnoměrně vybraných (úvodní + 11) */}}
+                            {{ $photos := slice }}
+                            {{ range readDir $dir }}
+                                {{ if and (not (eq .Name ".DS_Store")) (not (eq .Name "main.webp")) (not .IsDir) (not (strings.Contains .Name "-sm.webp")) (not (strings.Contains .Name "-md.webp")) (not (strings.Contains .Name "-hd.webp")) (not (strings.Contains .Name "-lg.webp")) }}
+                                    {{ $photos = $photos | append .Name }}
+                                {{ end }}
+                            {{ end }}
+                            {{ $step := math.Max 1 (math.Ceil (div (float (len $photos)) 11)) }}
+                            {{ range $i, $photoName := $photos }}
+                                {{ if eq (mod $i (int $step)) 0 }}
+                                    {{ $hd := replaceRE "\\.(webp|jpg|jpeg|png)$" "-hd.webp" $photoName }}
+                                    {{ $sm := replaceRE "\\.(webp|jpg|jpeg|png)$" "-sm.webp" $photoName }}
+                                    {{ $md := replaceRE "\\.(webp|jpg|jpeg|png)$" "-md.webp" $photoName }}
+                                    <a href="/media/imgs/gallery/{{ $name }}/{{ $photoName }}" class="glightbox" data-gallery="gallery1">
+                                        <img src="/media/imgs/gallery/{{ $name }}/{{ $sm }}" srcset="/media/imgs/gallery/{{ $name }}/{{ $sm }} 600w, /media/imgs/gallery/{{ $name }}/{{ $md }} 1200w, /media/imgs/gallery/{{ $name }}/{{ $hd }} 1920w" sizes="(max-width: 800px) 50vw, 30vw" alt="{{ $.Params.city }} {{ $year }}" loading="lazy">
+                                    </a>
+                                {{ end }}
+                            {{ end }}
+                        {{ end }}
+                    </div>
+                    <script>
+                        window.addEventListener("DOMContentLoaded", () => {
+                            function syncHeights() {
+                                const textBody = document.querySelector(".text-body");
+                                const galleryContainer = document.querySelector(".gallery-container");
+                                if (textBody && galleryContainer) {
+                                    // text je krátký, galerie proto dostane minimální výšku, aby bylo vidět víc fotek
+                                    galleryContainer.style.height = `${Math.max(textBody.offsetHeight, 640)}px`;
+                                }
+                            }
+                            syncHeights();
+                            window.addEventListener("resize", syncHeights);
+                            window.addEventListener("scroll", syncHeights);
+                        });
+                        if (typeof GLightbox !== "undefined") {
+                            GLightbox({ touchNavigation: true, loop: true });
+                        }
+                    </script>
+                </div>
+                <div class="text-body">
+                    <h3>Our story in {{ $.Params.city }}</h3>
+                    {{ $.Content }}
+                </div>
+            </div>
+        </section>
+    {{ end }}
+
+    {{ with $cz.Params.team }}
+    <section class="layout-container" id="team">
+        <div class="layout-content">
+            <h2>Behind Consider Science! {{ $.Params.headerTitle }}</h2>
+            <div class="team-body">
+                {{ range . }}
+                    {{ $name := index (split . "-") 0 }}
+                    <div class="team-member">
+                        <a href="/en/contact/#{{ . }}" class="team-member-link">
+                            <div class="team-member-photo-container">
+                                <img class="team-member-photo" src="/media/imgs/team/{{ . }}-sm.webp" srcset="/media/imgs/team/{{ . }}-sm.webp 600w, /media/imgs/team/{{ . }}-md.webp 1200w, /media/imgs/team/{{ . }}-hd.webp 1920w" sizes="150px" alt="{{ $name }}">
+                            </div>
+                            <p class="team-member-name">{{ $name }}</p>
+                        </a>
+                    </div>
+                {{ end }}
+            </div>
+        </div>
+    </section>
+    {{ end }}
+
+    {{/* Stejné partnery jako česká stránka, jen s anglickými nadpisy */}}
+    {{ $partners := partial "partners.html" $cz }}
+    {{ $partners = replace $partners "Partneři" "Partners" }}
+    {{ $partners = replace $partners "Podporovatelé" "Supporters" }}
+    {{ $partners | safeHTML }}
+{{end}}

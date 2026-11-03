@@ -154,6 +154,12 @@ section .layout-content {
     section .layout-content.team-section {
         flex-direction: column !important;
     }
+    /* Fotka s textem (text-img, title-text): na úzkých displejích je fotka nad textem, ne vedle něj */
+    #content section .layout-content:has(> .img-body) {
+        flex-direction: column !important;
+        align-items: stretch;
+        gap: 2rem;
+    }
     .partner-row {
         max-width: 100%;
         justify-content: center;

@@ -3,9 +3,15 @@
   team:
     - "Vedení"
     - "Zakladatelé"
+  team_en:
+    - "Leadership"
+    - "Founders"
   position:
     - "ředitel organizace"
     - "zakladatel"
+  position_en:
+    - "director of the organisation"
+    - "founder"
   photo: "honza.webp"
   mail: "herzig@zvazvedu.cz"
   ig: "https://www.instagram.com/jan.herzig/"
@@ -16,9 +22,15 @@
   team:
     - "Vedení"
     - "PR oddělení"
+  team_en:
+    - "Leadership"
+    - "PR department"
   position:
     - "zástupkyně ředitele"
     - "vedoucí"
+  position_en:
+    - "deputy director"
+    - "head of department"
   photo: "lucka.webp"
   mail: "kaiserova@zvazvedu.cz"
   ig: "https://www.instagram.com/kaiserovalucie/"
@@ -28,9 +40,15 @@
   team:
     - "Administrativní oddělení"
     - "Zakladatelé"
+  team_en:
+    - "Administration"
+    - "Founders"
   position:
     - "vedoucí"
     - "zakladatel"
+  position_en:
+    - "head of department"
+    - "founder"
   photo: "eda.webp"
   mail: "plic@zvazvedu.cz"
   ig: "https://www.instagram.com/plice_13/"
@@ -39,8 +57,12 @@
   alias: "petr"
   team:
     - "Administrativní oddělení"
+  team_en:
+    - "Administration"
   position:
     - "právní koordinátor"
+  position_en:
+    - "legal coordinator"
   photo: "petr.webp"
   mail: "gersl@zvazvedu.cz"
   web: "pgersl.xyz"
@@ -51,16 +73,24 @@
   alias: "saša"
   team:
     - "PR oddělení"
+  team_en:
+    - "PR department"
   position:
     - "koordinátor komunikace s médii"
+  position_en:
+    - "media relations coordinator"
   photo: "saša.webp"
   
 - name: "Jakub Holeček"
   alias: "jakub-holecek"
   team:
     - "PR oddělení"
+  team_en:
+    - "PR department"
   position:
     - "koordinátor mailové komunikace"
+  position_en:
+    - "email communication coordinator"
   photo: "jakub-holecek.webp"
   mail: "holecek@zvazvedu.cz"
   ig: "https://www.instagram.com/_jakub_holecek_/?utm_source=ig_web_button_share_sheet"
@@ -70,8 +100,12 @@
   alias: "anežka"
   team:
     - "PR oddělení"
+  team_en:
+    - "PR department"
   position:
     - "koordinátor videotvorby"
+  position_en:
+    - "video production coordinator"
   photo: "strelbova.webp"
   mail: "strelbova@zvazvedu.cz"
   ig: "https://www.instagram.com/strelbovaanezka/"
@@ -80,8 +114,12 @@
   alias: "karel"
   team:
     - "PR oddělení"
+  team_en:
+    - "PR department"
   position:
     - "koordinátor fotografie"
+  position_en:
+    - "photography coordinator"
   photo: "horak.webp"
   mail: "horak@zvazvedu.cz"
   web: "photohorak.cz/"
@@ -91,8 +129,12 @@
   alias: "boris"
   team:
     - "PR oddělení"
+  team_en:
+    - "PR department"
   position:
     - "koordinátor grafiky"
+  position_en:
+    - "graphics coordinator"
   photo: "boris.webp"
   mail: "brovkin@zvazvedu.cz"
   ig: "https://www.instagram.com/_borisbrovkin/"
@@ -101,8 +143,12 @@
   alias: "poupič"
   team:
     - "PR oddělení"
+  team_en:
+    - "PR department"
   position:
     - "koordinátor grafické identity"
+  position_en:
+    - "visual identity coordinator"
   photo: "poupič.webp"
   mail: "poupa@zvazvedu.cz"
   ig: "https://www.instagram.com/jan_poupa/"
@@ -112,8 +158,12 @@
   alias: "jakub"
   team:
     - "HR oddělení"
+  team_en:
+    - "HR department"
   position:
     - "vedoucí"
+  position_en:
+    - "head of department"
   photo: "jakub.webp"
   mail: "anderle@zvazvedu.cz"
   ig: "https://www.instagram.com/dzejkob_anderle/"
@@ -123,8 +173,12 @@
   alias: "michal"
   team:
     - "Obchodní oddělení"
+  team_en:
+    - "Business department"
   position:
     - "vedoucí"
+  position_en:
+    - "head of department"
   photo: "michal.webp"
   mail: "sos@zvazvedu.cz"
 
@@ -134,10 +188,18 @@
     - "HR oddělení"
     - "Obchodní oddělení"
     - "Regionální koordinátoři"
+  team_en:
+    - "HR department"
+    - "Business department"
+    - "Regional coordinators"
   position:
     - "koordinátor řečníků"
     - "koordinátor ubytování & stravování"
     - "koordinátor pro Liberec"
+  position_en:
+    - "speaker coordinator"
+    - "accommodation & catering coordinator"
+    - "coordinator for Liberec"
   photo: "áďa.webp"
   mail: "podholova@zvazvedu.cz"
   linkedin: "https://cz.linkedin.com/in/ad%C3%A9la-podholov%C3%A1-38292435b"
@@ -147,8 +209,12 @@
   alias: "amča"
   team:
     - "HR oddělení"
+  team_en:
+    - "HR department"
   position:
     - "koordinátor ambasadorů"
+  position_en:
+    - "ambassador coordinator"
   photo: "amča.webp"
   mail: "bartikova@zvazvedu.cz"
   discord: "https://discordapp.com/users/1388574265544020159"
@@ -157,8 +223,12 @@
   alias: "oliver"
   team:
     - "HR oddělení"
+  team_en:
+    - "HR department"
   position:
     - "koordinátor organizátorů"
+  position_en:
+    - "organiser coordinator"
   photo: "oliver.webp"
   mail: "klimes@zvazvedu.cz"
   ig: "https://www.instagram.com/oliverklimes/"
@@ -168,8 +238,12 @@
   alias: "matěj"
   team:
     - "HR oddělení"
+  team_en:
+    - "HR department"
   position:
     - "pomocný organizátor"
+  position_en:
+    - "assistant organiser"
   photo: "matěj.webp"
   mail: "sicner@zvazvedu.cz"
   ig: "https://www.instagram.com/msicner/"
@@ -179,9 +253,15 @@
   team:
     - "HR oddělení"
     - "Zakladatelé"
+  team_en:
+    - "HR department"
+    - "Founders"
   position:
     - "pomocný organizátor"
     - "zakladatel"
+  position_en:
+    - "assistant organiser"
+    - "founder"
   photo: "david.webp"
   mail: "nemec@zvazvedu.cz"
 
@@ -190,9 +270,15 @@
   team:
     - "Technické oddělení"
     - "Zakladatelé"
+  team_en:
+    - "Technical department"
+    - "Founders"
   position:
     - "vedoucí"
     - "zakladatel"
+  position_en:
+    - "head of department"
+    - "founder"
   photo: "tomáš.webp"
   mail: "rajchman@zvazvedu.cz"
 
@@ -200,8 +286,12 @@
   alias: "slávek"
   team:
     - "Regionální koordinátoři"
+  team_en:
+    - "Regional coordinators"
   position:
     - "koordinátor pro Vysočinu"
+  position_en:
+    - "coordinator for the Vysočina region"
   photo: "tomasek.webp"
   mail: "tomasek@zvazvedu.cz"
 
@@ -209,8 +299,12 @@
   alias: "maty"
   team:
     - "Zakladatelé"
+  team_en:
+    - "Founders"
   position:
     - "zakladatel"
+  position_en:
+    - "founder"
   photo: "maty.webp"
   mail: "matta@zvazvedu.cz"
   linkedin: "https://cz.linkedin.com/in/matyasmatta/en"
