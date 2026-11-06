@@ -24,7 +24,7 @@ eventEndTime: 2026-11-28
 
 noticeBadge: "Novinka"
 noticeTitle: "Prodloužený program!"
-noticeText: "Páteční akce od 9 do 15 hodin tak jak ji znáte bude otevřená 400 studentům. Pro 150 zájemců však poprvé nabídneme speciální program až do soboty – těšit se můžete na prodloužené exkurze, networkingovou party, workshopy nebo panelovou diskusi s vědci."
+noticeText: "Páteční akce od 9 do 15 hodin tak jak ji znáte bude otevřená 400 studentům. Pro 150 zájemců však poprvé nabídneme speciální program až do soboty – těšit se můžete na prodloužené exkurze, networkingový večer, workshopy nebo panelovou diskusi s vědci."
 noticeHighlight: "Jakých bloků programu se chcete zúčastnit zvolíte v registračním formuláři. Pokud se přihlásíte včas, můžete dosáhnout i na ubytování zdarma!"
 
 abstracts: false
